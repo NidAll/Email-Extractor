@@ -1,0 +1,9 @@
+{
+    "manifest_version": 2,
+    "name": "Email Extractor",
+    "version": "1.0",
+    "permissions": ["activeTab"],
+    "browser_action": {
+      "default_popup": "popup.html"
+    }
+  }
