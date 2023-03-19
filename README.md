@@ -1,0 +1,4 @@
+# Email-Extractor
+The Email Extractor extension is a simple tool that allows you to quickly and easily extract email addresses from the current tab in your Chrome browser. When you click on the extension’s icon in Chrome’s toolbar, it opens a popup window displaying a list of all email addresses found in the HTML content of the current tab. This can be useful for quickly gathering contact information from websites or for finding email addresses hidden within a page’s source code.
+
+The extension uses a regular expression to match and extract email addresses from the page’s content. You can adjust this regular expression to better match the types of email addresses you’re looking for. The extracted email addresses are displayed in a list inside the extension’s popup window for easy viewing and copying.
