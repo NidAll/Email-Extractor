@@ -1,15 +1,183 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <title>Email Extractor</title>
     <style>
+      :root {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        color: #0f172a;
+        background: #f8fafc;
+      }
+
       body {
-        width: 400px;
+        width: 420px;
+        margin: 0;
+        padding: 16px;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0b1120;
+      }
+
+      .section {
+        background: white;
+        border-radius: 10px;
+        padding: 12px 14px;
+        box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+        margin-bottom: 12px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        text-align: center;
+      }
+
+      .stat-title {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #475569;
+        letter-spacing: 0.08em;
+      }
+
+      .stat-value {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .controls input[type="search"] {
+        flex: 1 1 180px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #cbd5f5;
+        font-size: 13px;
+      }
+
+      .controls button {
+        flex: 0 0 auto;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        background: #2563eb;
+        color: white;
+        transition: background 0.2s ease;
+      }
+
+      .controls button.secondary {
+        background: #0f172a;
+      }
+
+      .controls button.success {
+        background: #16a34a;
+      }
+
+      .controls button:disabled {
+        background: #cbd5f5;
+        cursor: not-allowed;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #475569;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px 6px;
+        border-bottom: 1px solid #e2e8f0;
+        word-break: break-all;
+      }
+
+      tbody tr:hover {
+        background: #f1f5f9;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 20px 0;
+        color: #475569;
+        font-size: 14px;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 11px;
+        color: #64748b;
+        margin-top: 10px;
       }
     </style>
-    <script src="popup.js"></script>
+    <script defer src="popup.js"></script>
   </head>
   <body>
     <h1>Email Extractor</h1>
-    <ul id="emails"></ul>
+    <div class="section">
+      <div class="stats">
+        <div>
+          <div class="stat-title">Total matches</div>
+          <div class="stat-value" id="stat-total">0</div>
+        </div>
+        <div>
+          <div class="stat-title">Unique emails</div>
+          <div class="stat-value" id="stat-unique">0</div>
+        </div>
+        <div>
+          <div class="stat-title">Unique domains</div>
+          <div class="stat-value" id="stat-domains">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="controls">
+        <input
+          type="search"
+          id="filter"
+          placeholder="Filter by email or domain"
+          aria-label="Filter email results"
+        />
+        <button id="copy" disabled>Copy all</button>
+        <button id="export" class="secondary" disabled>Export CSV</button>
+      </div>
+      <div class="table-wrapper">
+        <table aria-live="polite">
+          <thead>
+            <tr>
+              <th scope="col">Email</th>
+              <th scope="col">Occurrences</th>
+              <th scope="col">Domain</th>
+            </tr>
+          </thead>
+          <tbody id="emails"></tbody>
+        </table>
+        <div id="empty" class="empty-state" hidden>
+          No email addresses were detected on this page.
+        </div>
+      </div>
+    </div>
+
+    <footer>Tip: refine with the filter or export to CSV for sharing.</footer>
   </body>
 </html>
