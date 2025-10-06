@@ -1,9 +1,10 @@
 {
-    "manifest_version": 2,
-    "name": "Email Extractor",
-    "version": "1.0",
-    "permissions": ["activeTab"],
-    "browser_action": {
-      "default_popup": "popup.html"
-    }
+  "manifest_version": 3,
+  "name": "Email Extractor",
+  "version": "2.0",
+  "description": "Find, filter, and export email addresses from the current tab.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
   }
+}
